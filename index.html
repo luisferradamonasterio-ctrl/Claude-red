@@ -387,8 +387,12 @@
 </div>
 
 <script>
-  const TICKET = '9AD92373-2AF1-4F72-B9D4-CA8E087E27F2';
-  const API    = 'https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json';
+  // En desarrollo local usa el proxy backend (evita CORS).
+  // En producción (GitHub Pages u otro host) llama directo a la API.
+  const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  const PROXY    = 'http://localhost:3000/api/licitaciones';
+  const TICKET   = '9AD92373-2AF1-4F72-B9D4-CA8E087E27F2';
+  const API      = 'https://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json';
 
   let todasLicitaciones = [];
   let filtroActivo      = 'todos';
@@ -586,7 +590,9 @@
     statusBar.textContent = '';
     container.innerHTML = `<div class="state"><div class="spinner"></div>Buscando licitaciones…</div>`;
 
-    const url = `${API}?ticket=${TICKET}&nombre=${encodeURIComponent(q)}`;
+    const url = IS_LOCAL
+      ? `${PROXY}?nombre=${encodeURIComponent(q)}`
+      : `${API}?ticket=${TICKET}&nombre=${encodeURIComponent(q)}`;
 
     try {
       const resp = await fetch(url);
@@ -610,7 +616,7 @@
           </svg>
           <div class="state-title">Error al consultar la API</div>
           ${err.message.includes('Failed to fetch') || err.message.includes('NetworkError')
-            ? 'El navegador bloqueó la solicitud (CORS). Usa el sitio desplegado en GitHub Pages.'
+            ? 'El navegador bloqueó la solicitud (CORS). Levanta el proxy local (<code>node server.js</code>) o usa el sitio desplegado en GitHub Pages.'
             : escHtml(err.message)}
         </div>`;
     }
