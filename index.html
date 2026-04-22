@@ -102,8 +102,8 @@
       cursor: pointer;
       transition: all .15s;
     }
-    .filter-btn:hover               { border-color: var(--primary); color: var(--primary); }
-    .filter-btn.active              { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .filter-btn:hover  { border-color: var(--primary); color: var(--primary); }
+    .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
     main {
       max-width: 860px;
@@ -142,10 +142,10 @@
       text-transform: uppercase;
       letter-spacing: .4px;
     }
-    .badge-publicada   { background: var(--badge-publicada-bg);   color: var(--badge-publicada-fg); }
-    .badge-cerrada     { background: var(--badge-cerrada-bg);     color: var(--badge-cerrada-fg); }
-    .badge-adjudicada  { background: var(--badge-adjudicada-bg);  color: var(--badge-adjudicada-fg); }
-    .badge-default     { background: var(--badge-default-bg);     color: var(--badge-default-fg); }
+    .badge-publicada  { background: var(--badge-publicada-bg);  color: var(--badge-publicada-fg); }
+    .badge-cerrada    { background: var(--badge-cerrada-bg);    color: var(--badge-cerrada-fg); }
+    .badge-adjudicada { background: var(--badge-adjudicada-bg); color: var(--badge-adjudicada-fg); }
+    .badge-default    { background: var(--badge-default-bg);    color: var(--badge-default-fg); }
 
     .card-meta {
       display: flex;
@@ -165,6 +165,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
     .card-link {
       font-size: .88rem;
@@ -178,7 +179,6 @@
     .card-link:hover { text-decoration: underline; }
     .card-link svg { width: 14px; height: 14px; }
 
-    /* ── Botón Ver Detalle ── */
     .btn-detalle {
       padding: 7px 16px;
       background: var(--primary);
@@ -195,7 +195,7 @@
     }
     .btn-detalle:hover { background: var(--primary-dark); }
 
-    /* ── Modal ── */
+    /* Modal */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -233,13 +233,12 @@
     }
     .modal-header-text { flex: 1; }
     .modal-header h2 { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
-    .modal-header .modal-codigo { font-size: .82rem; opacity: .8; margin-top: 4px; }
+    .modal-codigo { font-size: .82rem; opacity: .8; margin-top: 4px; }
     .modal-close {
       background: rgba(255,255,255,.18);
       border: none;
       color: #fff;
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       border-radius: 50%;
       cursor: pointer;
       font-size: 1.1rem;
@@ -253,25 +252,10 @@
 
     .modal-body { padding: 24px; }
 
-    .modal-spinner {
-      text-align: center;
-      padding: 40px 0;
-      color: var(--muted);
-    }
-    .modal-spinner .spinner {
-      width: 32px; height: 32px;
-      border: 3px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin .7s linear infinite;
-      margin: 0 auto 14px;
-    }
-
     .detail-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      margin-bottom: 20px;
     }
     @media (max-width: 540px) { .detail-grid { grid-template-columns: 1fr; } }
 
@@ -279,29 +263,7 @@
     .detail-field.full { grid-column: 1 / -1; }
     .detail-label { font-size: .75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
     .detail-value { font-size: .92rem; color: var(--text); line-height: 1.5; word-break: break-word; }
-    .detail-value.empty { color: var(--muted); font-style: italic; }
-
-    .items-table-wrap { overflow-x: auto; margin-top: 4px; }
-    .items-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .85rem;
-    }
-    .items-table th {
-      background: var(--primary);
-      color: #fff;
-      text-align: left;
-      padding: 9px 12px;
-      font-weight: 600;
-      font-size: .8rem;
-    }
-    .items-table td {
-      padding: 8px 12px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-    .items-table tr:last-child td { border-bottom: none; }
-    .items-table tr:nth-child(even) td { background: var(--bg); }
+    .detail-value .empty { color: var(--muted); font-style: italic; }
 
     .modal-footer {
       padding: 16px 24px;
@@ -326,7 +288,7 @@
       transition: background .2s;
     }
     .modal-footer a:hover { background: var(--primary-dark); }
-    .modal-footer .btn-cerrar {
+    .btn-cerrar {
       padding: 9px 18px;
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -335,7 +297,7 @@
       cursor: pointer;
       transition: background .15s;
     }
-    .modal-footer .btn-cerrar:hover { background: var(--bg); }
+    .btn-cerrar:hover { background: var(--bg); }
 
     .state {
       text-align: center;
@@ -372,21 +334,18 @@
 
 <div class="search-wrapper">
   <div class="search-row">
-    <input
-      id="searchInput"
-      type="text"
+    <input id="searchInput" type="text"
       placeholder="Ej: software, ciberseguridad, inteligencia artificial…"
-      autocomplete="off"
-    />
-    <button id="searchBtn" onclick="buscar()">Buscar</button>
+      autocomplete="off" />
+    <button onclick="buscar()">Buscar</button>
   </div>
   <div class="filters">
     <span>Filtrar:</span>
-    <button class="filter-btn active" data-estado="todos" onclick="setFiltro(this)">Todos</button>
-    <button class="filter-btn" data-estado="Publicada" onclick="setFiltro(this)">Publicadas</button>
-    <button class="filter-btn" data-estado="Cerrada" onclick="setFiltro(this)">Cerradas</button>
-    <button class="filter-btn" data-estado="Adjudicada" onclick="setFiltro(this)">Adjudicadas</button>
-    <button class="filter-btn" data-estado="Desierta" onclick="setFiltro(this)">Desiertas</button>
+    <button class="filter-btn active" data-estado="todos"      onclick="setFiltro(this)">Todos</button>
+    <button class="filter-btn"        data-estado="Publicada"  onclick="setFiltro(this)">Publicadas</button>
+    <button class="filter-btn"        data-estado="Cerrada"    onclick="setFiltro(this)">Cerradas</button>
+    <button class="filter-btn"        data-estado="Adjudicada" onclick="setFiltro(this)">Adjudicadas</button>
+    <button class="filter-btn"        data-estado="Desierta"   onclick="setFiltro(this)">Desiertas</button>
   </div>
 </div>
 
@@ -403,22 +362,20 @@
   </div>
 </main>
 
-<!-- ══════════════ MODAL DETALLE ══════════════ -->
+<!-- MODAL DETALLE -->
 <div class="modal-overlay" id="modalOverlay" onclick="cerrarModalOverlay(event)">
-  <div class="modal" id="modalBox">
-    <div class="modal-header" id="modalHeader">
+  <div class="modal">
+    <div class="modal-header">
       <div class="modal-header-text">
-        <h2 id="modalTitulo">Cargando…</h2>
+        <h2 id="modalTitulo"></h2>
         <div class="modal-codigo" id="modalCodigo"></div>
       </div>
-      <button class="modal-close" onclick="cerrarModal()" title="Cerrar">✕</button>
+      <button class="modal-close" onclick="cerrarModal()">✕</button>
     </div>
-    <div class="modal-body" id="modalBody">
-      <div class="modal-spinner"><div class="spinner"></div>Consultando detalle…</div>
-    </div>
-    <div class="modal-footer" id="modalFooter" style="display:none">
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
       <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
-      <a id="modalLinkPortal" href="#" target="_blank" rel="noopener">
+      <a id="modalLink" href="#" target="_blank" rel="noopener">
         Ver en Mercado Público
         <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -437,26 +394,25 @@
   let filtroActivo      = 'todos';
 
   const ESTADOS = {
-    '5':  'Publicada',  'publicada':  'Publicada',
-    '6':  'Cerrada',    'cerrada':    'Cerrada',
-    '7':  'Desierta',   'desierta':   'Desierta',
-    '8':  'Adjudicada', 'adjudicada': 'Adjudicada',
-    '9':  'Revocada',   'revocada':   'Revocada',
-    '10': 'Suspendida', 'suspendida': 'Suspendida',
-    '13': 'Publicada',
-    '18': 'Revocada',
+    '5':'Publicada','publicada':'Publicada',
+    '6':'Cerrada','cerrada':'Cerrada',
+    '7':'Desierta','desierta':'Desierta',
+    '8':'Adjudicada','adjudicada':'Adjudicada',
+    '9':'Revocada','revocada':'Revocada',
+    '10':'Suspendida','suspendida':'Suspendida',
+    '13':'Publicada','18':'Revocada',
   };
 
   function estadoLabel(val) {
     if (!val && val !== 0) return 'Desconocido';
     const key = String(val).toLowerCase().trim();
-    return ESTADOS[key] || (val.toString().charAt(0).toUpperCase() + val.toString().slice(1));
+    return ESTADOS[key] || (String(val).charAt(0).toUpperCase() + String(val).slice(1));
   }
 
   function badgeClass(label) {
     const l = label.toLowerCase();
-    if (l === 'publicada') return 'badge-publicada';
-    if (l === 'cerrada')   return 'badge-cerrada';
+    if (l === 'publicada')   return 'badge-publicada';
+    if (l === 'cerrada')     return 'badge-cerrada';
     if (l.startsWith('adj')) return 'badge-adjudicada';
     return 'badge-default';
   }
@@ -464,7 +420,7 @@
   function formatFecha(raw) {
     if (!raw) return '—';
     const ms = raw.match(/\/Date\((\d+)/);
-    const d   = ms ? new Date(+ms[1]) : new Date(raw);
+    const d  = ms ? new Date(+ms[1]) : new Date(raw);
     if (isNaN(d)) return raw;
     return d.toLocaleDateString('es-CL', { day: '2-digit', month: 'short', year: 'numeric' });
   }
@@ -478,16 +434,61 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  // ══════════════ MODAL ══════════════
+  function campo(label, valor, full = false) {
+    const v = valor && String(valor).trim()
+      ? escHtml(String(valor))
+      : '<span class="empty">—</span>';
+    return `<div class="detail-field${full ? ' full' : ''}">
+      <div class="detail-label">${label}</div>
+      <div class="detail-value">${v}</div>
+    </div>`;
+  }
 
-  function abrirModal(codigo, nombre) {
+  // Abre modal con datos ya disponibles del listado (sin segunda llamada API)
+  function abrirModal(idx) {
+    const l = todasLicitaciones[idx];
+    if (!l) return;
+
+    const nombre    = l.Nombre    || l.nombre    || 'Sin nombre';
+    const codigo    = l.CodigoExterno || l.codigoExterno || l.Codigo || l.codigo || '';
+    const organismo = l.Organismo?.Nombre || l.organismo || '—';
+    const estado    = estadoLabel(l.Estado ?? l.estado ?? '');
+    const tipo      = l.Tipo || l.TipoConvocatoria || '—';
+    const cierre    = formatFecha(l.FechaCierre    || l.fechaCierre);
+    const publicada = formatFecha(l.FechaPublicacion || l.fechaPublicacion || l.FechaInicio);
+    const apertura  = formatFecha(l.FechaApertura  || l.fechaApertura);
+    const region    = l.Comprador?.RegionUnidad || l.Region || '—';
+    const comuna    = l.Comprador?.ComunaUnidad || l.Comuna || '—';
+    const rut       = l.Comprador?.RutUnidad    || '—';
+    const monto     = l.MontoEstimado
+      ? `$${Number(l.MontoEstimado).toLocaleString('es-CL')} ${l.Moneda || 'CLP'}`
+      : '—';
+    const desc = l.Descripcion || l.descripcion || '';
+
     document.getElementById('modalTitulo').textContent = nombre;
-    document.getElementById('modalCodigo').textContent = codigo;
-    document.getElementById('modalBody').innerHTML = '<div class="modal-spinner"><div class="spinner"></div>Consultando detalle…</div>';
-    document.getElementById('modalFooter').style.display = 'none';
+    document.getElementById('modalCodigo').textContent = codigo ? `Código: ${codigo}` : '';
+    document.getElementById('modalLink').href = urlLicitacion(codigo);
+
+    document.getElementById('modalBody').innerHTML = `
+      <div class="detail-grid">
+        ${campo('Organismo', organismo)}
+        ${campo('Estado', estado)}
+        ${campo('Tipo licitación', tipo)}
+        ${campo('Monto estimado', monto)}
+        ${campo('Fecha publicación', publicada)}
+        ${campo('Fecha cierre', cierre)}
+        ${campo('Apertura de ofertas', apertura)}
+        ${campo('Región', region)}
+        ${campo('Comuna', comuna)}
+        ${campo('RUT unidad compradora', rut)}
+        ${desc ? campo('Descripción', desc, true) : ''}
+      </div>
+      <p style="margin-top:16px;font-size:.8rem;color:var(--muted);text-align:center">
+        Para ver ítems, bases y adjudicación completa → usa "Ver en Mercado Público" ↓
+      </p>`;
+
     document.getElementById('modalOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
-    cargarDetalle(codigo);
   }
 
   function cerrarModal() {
@@ -500,97 +501,6 @@
   }
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
-
-  async function cargarDetalle(codigo) {
-    const url = `${API}?ticket=${TICKET}&codigo=${encodeURIComponent(codigo)}`;
-    try {
-      const resp = await fetch(url);
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const data = await resp.json();
-      const lic  = (data.Listado || data.listado || [])[0];
-      if (!lic) throw new Error('No se encontró el detalle de esta licitación.');
-      renderDetalle(lic);
-    } catch (err) {
-      document.getElementById('modalBody').innerHTML = `
-        <div class="state" style="padding:30px 0">
-          <div class="state-title">Error al cargar detalle</div>
-          ${escHtml(err.message)}
-        </div>`;
-    }
-  }
-
-  function campo(label, valor, full = false) {
-    const v = valor && String(valor).trim() ? escHtml(valor) : '<span class="empty">—</span>';
-    return `<div class="detail-field${full ? ' full' : ''}">
-      <div class="detail-label">${label}</div>
-      <div class="detail-value">${v}</div>
-    </div>`;
-  }
-
-  function renderDetalle(lic) {
-    const nombre    = lic.Nombre || '—';
-    const codigo    = lic.CodigoExterno || lic.Codigo || '';
-    const organismo = lic.Organismo?.Nombre || lic.NombreOrganismo || '—';
-    const estado    = estadoLabel(lic.Estado ?? '');
-    const desc      = lic.Descripcion || lic.descripcion || '';
-    const monto     = lic.MontoEstimado
-                        ? `$${Number(lic.MontoEstimado).toLocaleString('es-CL')} ${lic.Moneda || 'CLP'}`
-                        : '—';
-    const tipo      = lic.Tipo || lic.TipoConvocatoria || '—';
-    const cierre    = formatFecha(lic.Fechas?.FechaCierre || lic.FechaCierre);
-    const publicada = formatFecha(lic.Fechas?.FechaPublicacion || lic.FechaPublicacion);
-    const apertura  = formatFecha(lic.Fechas?.FechaApertura || lic.FechaApertura);
-    const contacto  = [lic.Responsable?.Nombre, lic.Responsable?.Email, lic.Responsable?.Telefono]
-                        .filter(Boolean).join(' · ') || '—';
-
-    // Ítems
-    const itemsLista = lic.Items?.Listado || lic.Items?.listado || [];
-    let itemsHtml = '';
-    if (itemsLista.length) {
-      const filas = itemsLista.map(i => `
-        <tr>
-          <td>${escHtml(String(i.Correlativo || i.correlativo || ''))}</td>
-          <td>${escHtml(i.NombreProducto || i.Nombre || i.nombre || '—')}</td>
-          <td>${escHtml(String(i.Cantidad || '—'))} ${escHtml(i.UnidadMedida || '')}</td>
-          <td>${escHtml(i.Descripcion || i.descripcion || '—')}</td>
-        </tr>`).join('');
-      itemsHtml = `
-        <div class="detail-field full">
-          <div class="detail-label">Ítems requeridos (${itemsLista.length})</div>
-          <div class="items-table-wrap">
-            <table class="items-table">
-              <thead><tr><th>#</th><th>Producto / Servicio</th><th>Cantidad</th><th>Descripción</th></tr></thead>
-              <tbody>${filas}</tbody>
-            </table>
-          </div>
-        </div>`;
-    } else {
-      itemsHtml = campo('Ítems', 'Sin ítems registrados', true);
-    }
-
-    document.getElementById('modalTitulo').textContent = nombre;
-    document.getElementById('modalCodigo').textContent = codigo;
-
-    document.getElementById('modalBody').innerHTML = `
-      <div class="detail-grid">
-        ${campo('Organismo', organismo)}
-        ${campo('Estado', estado)}
-        ${campo('Tipo', tipo)}
-        ${campo('Monto estimado', monto)}
-        ${campo('Fecha publicación', publicada)}
-        ${campo('Fecha cierre', cierre)}
-        ${campo('Apertura de ofertas', apertura)}
-        ${campo('Contacto', contacto)}
-        ${desc ? campo('Descripción', desc, true) : ''}
-        ${itemsHtml}
-      </div>`;
-
-    const linkPortal = document.getElementById('modalLinkPortal');
-    linkPortal.href = urlLicitacion(codigo);
-    document.getElementById('modalFooter').style.display = 'flex';
-  }
-
-  // ══════════════ RENDER TARJETAS ══════════════
 
   function renderTarjetas(lista) {
     const container = document.getElementById('cardsContainer');
@@ -609,23 +519,19 @@
 
     if (!filtradas.length) {
       container.innerHTML = emptyState(
-        filtroActivo !== 'todos'
-          ? `Sin resultados para el filtro "${filtroActivo}"`
-          : 'Sin resultados',
-        filtroActivo !== 'todos'
-          ? 'Prueba seleccionando "Todos" o ajusta las palabras clave.'
-          : 'Intenta con otros términos de búsqueda.'
+        filtroActivo !== 'todos' ? `Sin resultados para "${filtroActivo}"` : 'Sin resultados',
+        filtroActivo !== 'todos' ? 'Prueba con "Todos" o ajusta las palabras clave.' : 'Intenta con otros términos.'
       );
       return;
     }
 
     container.innerHTML = filtradas.map(l => {
-      const nombre    = l.Nombre   || l.nombre   || 'Sin nombre';
-      const organismo = (l.Organismo && (l.Organismo.Nombre || l.Organismo.nombre))
-                        || l.organismo || '—';
+      const idx       = todasLicitaciones.indexOf(l);
+      const nombre    = l.Nombre    || l.nombre    || 'Sin nombre';
+      const organismo = (l.Organismo && (l.Organismo.Nombre || l.Organismo.nombre)) || l.organismo || '—';
       const codigo    = l.CodigoExterno || l.codigoExterno || l.Codigo || l.codigo || '';
       const estado    = estadoLabel(l.Estado ?? l.estado ?? '');
-      const cierre    = formatFecha(l.FechaCierre || l.fechaCierre);
+      const cierre    = formatFecha(l.FechaCierre    || l.fechaCierre);
       const inicio    = formatFecha(l.FechaPublicacion || l.fechaPublicacion || l.FechaInicio);
 
       return `
@@ -642,15 +548,15 @@
           </div>
           <div class="card-footer">
             <a class="card-link" href="${urlLicitacion(codigo)}" target="_blank" rel="noopener">
-              Ver en Mercado Público
+              Ver en portal
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                 <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
               </svg>
             </a>
-            ${codigo ? `<button class="btn-detalle" onclick="abrirModal('${escHtml(codigo)}', '${escHtml(nombre).replace(/'/g,"\\'")}')">
+            <button class="btn-detalle" onclick="abrirModal(${idx})">
               🔎 Ver detalle
-            </button>` : ''}
+            </button>
           </div>
         </div>`;
     }).join('');
@@ -673,10 +579,7 @@
 
   async function buscar() {
     const q = document.getElementById('searchInput').value.trim();
-    if (!q) {
-      document.getElementById('searchInput').focus();
-      return;
-    }
+    if (!q) { document.getElementById('searchInput').focus(); return; }
 
     const container = document.getElementById('cardsContainer');
     const statusBar = document.getElementById('statusBar');
@@ -692,11 +595,9 @@
       todasLicitaciones = data.Listado || data.listado || (Array.isArray(data) ? data : []);
 
       if (!todasLicitaciones.length) {
-        statusBar.textContent = '';
         container.innerHTML = emptyState('Sin resultados', `No se encontraron licitaciones para "<strong>${escHtml(q)}</strong>".`);
         return;
       }
-
       renderTarjetas(todasLicitaciones);
 
     } catch (err) {
@@ -709,7 +610,7 @@
           </svg>
           <div class="state-title">Error al consultar la API</div>
           ${err.message.includes('Failed to fetch') || err.message.includes('NetworkError')
-            ? 'El navegador bloqueó la solicitud por CORS. Ejecuta este archivo desde un servidor local o usa un proxy.'
+            ? 'El navegador bloqueó la solicitud (CORS). Usa el sitio desplegado en GitHub Pages.'
             : escHtml(err.message)}
         </div>`;
     }
